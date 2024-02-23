@@ -61,13 +61,13 @@ public class ProdutoService {
     }
 
     private List<Produto> findProdutosByNomeTipoProduto(String nomeTipoProduto) throws EntityNotFoundException {
-        TipoProduto tipo = tipoProdutoRepository.findByNome(nomeTipoProduto)
+        TipoProduto tipo = tipoProdutoRepository.findByDescricao(nomeTipoProduto)
                 .orElseThrow(() -> new EntityNotFoundException("Tipo de produto com descrição \"" + nomeTipoProduto + "\" não encontrado."));
         return produtoRepository.findProdutoByTipoProduto(tipo);
     }
 
     private Page<Produto> findProdutosByNomeTipoProduto(String nomeTipoProduto, Pageable pageable) throws EntityNotFoundException {
-        TipoProduto tipo = tipoProdutoRepository.findByNome(nomeTipoProduto)
+        TipoProduto tipo = tipoProdutoRepository.findByDescricao(nomeTipoProduto)
                 .orElseThrow(() -> new EntityNotFoundException("Tipo de produto com descrição \"" + nomeTipoProduto + "\" não encontrado."));
         return produtoRepository.findProdutoByTipoProduto(tipo, pageable);
     }

@@ -22,7 +22,7 @@ public class TipoProdutoService {
     }
 
     public TipoProduto salvar(TipoProduto tipoProduto) {
-        tipoProduto.setNome(tipoProduto.getNome().toUpperCase());
+        tipoProduto.setDescricao(tipoProduto.getDescricao().toUpperCase());
         return tipoProdutoRepository.save(tipoProduto);
     }
 
@@ -32,6 +32,6 @@ public class TipoProdutoService {
      * @return TipoProduto correspondente ao nome ou null caso não encontre
      */
     public TipoProduto findByNome(String nomeTipoProduto) {
-        return tipoProdutoRepository.findByNome(nomeTipoProduto).orElse(null);
+        return tipoProdutoRepository.findByDescricao(nomeTipoProduto).orElse(null);
     }
 }

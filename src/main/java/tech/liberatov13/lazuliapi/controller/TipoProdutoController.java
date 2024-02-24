@@ -33,4 +33,10 @@ public class TipoProdutoController {
 		tipoProduto = tipoProdutoService.save(tipoProduto);
 		return new ResponseEntity<>(modelMapper.map(tipoProduto, TipoProdutoDTO.class), HttpStatus.CREATED);
 	}
+
+	@DeleteMapping("/{idTipoProduto}")
+	public ResponseEntity<Void> delete(@PathVariable Long idTipoProduto) {
+		tipoProdutoService.delete(idTipoProduto);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

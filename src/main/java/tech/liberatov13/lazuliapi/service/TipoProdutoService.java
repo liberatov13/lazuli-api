@@ -59,4 +59,13 @@ public class TipoProdutoService {
             throw new RuntimeException(e);
         }
     }
+
+    public void delete(Long idTipoProduto) {
+        try {
+            tipoProdutoRepository.deleteById(idTipoProduto);
+        } catch (Exception e) {
+            logger.error("Ocorreu um erro ao deletar o tipo de produto com id {}", idTipoProduto, e);
+            throw new RuntimeException(e);
+        }
+    }
 }

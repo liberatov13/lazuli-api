@@ -28,22 +28,8 @@ public class Produto {
     private String descricaoCompleta;
 
     @ManyToOne
-    @JoinColumn(name = "id_marca")
-    private Marca marca;
-
-    @Column(name = "cod_barras")
-    private Long codigoBarras;
-
-    @ManyToOne
     @JoinColumn(name = "id_tipo_produto", nullable = false)
     private TipoProduto tipoProduto;
-
-    @ManyToOne
-    @JoinColumn(name = "id_unidade_medida", nullable = false)
-    private UnidadeMedida unidadeMedida;
-
-    @Column(name = "qtd_estoque")
-    private Double quantidadeEstoque;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean status;

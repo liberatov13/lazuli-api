@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -33,6 +34,9 @@ public class Produto {
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean status;
+
+    @Column(name = "dt_cadastro", nullable = false)
+    private LocalDate dataCadastro;
 
     @JsonBackReference
     @ToString.Exclude

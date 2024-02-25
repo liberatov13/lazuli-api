@@ -12,6 +12,7 @@ import tech.liberatov13.lazuliapi.domain.TipoProduto;
 import tech.liberatov13.lazuliapi.repository.ProdutoRepository;
 import tech.liberatov13.lazuliapi.repository.TipoProdutoRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -38,20 +39,28 @@ public class ProdutoService {
         return produtoRepository.findProdutoByTipoProduto(tipoProduto, paginacao);
     }
 
+    /**
+     * Realiza a persistência de produto
+     * @param produto Produto a ser persistido
+     * @return Produto salvo
+     */
     public Produto save(Produto produto) {
-        produto.setDescricaoBasica(produto.getDescricaoBasica().toUpperCase());
-        if (produto.getDescricaoCompleta() != null && !produto.getDescricaoCompleta().isBlank()) {
-            produto.setDescricaoCompleta(produto.getDescricaoCompleta().toUpperCase());
-        }
-        Produto produtoSalvo = null;
         try {
-            produtoSalvo = produtoRepository.save(produto);
-            logger.info("Produto salvo com sucesso, id: " + produtoSalvo.getIdProduto());
+            produto.setIdProduto(null);
+            produto.setDescricaoBasica(produto.getDescricaoBasica().toUpperCase());
+
+            if (produto.getDescricaoCompleta() != null && !produto.getDescricaoCompleta().isBlank())
+                produto.setDescricaoCompleta(produto.getDescricaoCompleta().toUpperCase());
+
+            produto.setDataCadastro(LocalDate.now());
+
+            Produto produtoSaved = produtoRepository.save(produto);
+            logger.info("Produto salvo com sucesso, id: " + produtoSaved.getIdProduto());
+            return produtoSaved;
         } catch (Exception e) {
             logger.error("Ocorreu um erro ao persistir produto", e);
             throw new RuntimeException("Erro ao persistir produto", e);
         }
-        return produtoSalvo;
     }
 
     public Produto edit(Produto produto) {

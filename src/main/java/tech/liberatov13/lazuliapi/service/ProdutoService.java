@@ -40,9 +40,7 @@ public class ProdutoService {
 
     public Produto save(Produto produto) {
         produto.setDescricaoBasica(produto.getDescricaoBasica().toUpperCase());
-        if (produto.getDescricaoCompleta().isEmpty()) {
-            produto.setDescricaoCompleta(null);
-        } else {
+        if (produto.getDescricaoCompleta() != null && !produto.getDescricaoCompleta().isBlank()) {
             produto.setDescricaoCompleta(produto.getDescricaoCompleta().toUpperCase());
         }
         Produto produtoSalvo = null;
@@ -50,8 +48,8 @@ public class ProdutoService {
             produtoSalvo = produtoRepository.save(produto);
             logger.info("Produto salvo com sucesso, id: " + produtoSalvo.getIdProduto());
         } catch (Exception e) {
-            // TODO: Avaliar a possibilidade de retornar uma Exception para o controller
-            logger.warn("Erro ao persistir produto", e);
+            logger.error("Ocorreu um erro ao persistir produto", e);
+            throw new RuntimeException("Erro ao persistir produto", e);
         }
         return produtoSalvo;
     }
@@ -74,6 +72,37 @@ public class ProdutoService {
 
     public Produto findById(Long idProduto) {
         return produtoRepository.findById(idProduto).orElseThrow(() -> new RuntimeException("Produto com id não" + idProduto + " encontrado"));
+    }
+
+    /**
+     * Realiza a ativação do produto
+     * @param idProduto Id do produto a ser ativado
+     * @return Produto ativado
+     */
+    public Produto activate(Long idProduto) {
+        try {
+            Produto produto = this.findById(idProduto);
+            produto.setStatus(true);
+            return produtoRepository.save(produto);
+        } catch (Exception e) {
+            logger.error("Ocorreu um erro ao ativar produtoo produto {}", idProduto, e);
+            throw new RuntimeException("Erro ao ativar o produto "+idProduto, e);
+        }
+    }
+
+	/**
+	 * Realiza a desativação do produto
+	 * @param idProduto  Id do produto a ser desativado
+	 */
+    public Produto disable(Long idProduto) {
+        try {
+            Produto produto = this.findById(idProduto);
+            produto.setStatus(false);
+            return produtoRepository.save(produto);
+        } catch (Exception e) {
+            logger.error("Ocorreu um erro ao desativar produtoo produto {}", idProduto, e);
+            throw new RuntimeException("Erro ao desativar o produto "+idProduto, e);
+        }
     }
 
 }

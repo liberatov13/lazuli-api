@@ -19,7 +19,7 @@ public class TipoProduto {
     @Column(name = "id_tipo_produto")
     private Long idTipoProduto;
 
-    @Column(nullable = false)
-    private String nome;
+    @Column(name = "nome", nullable = false)
+    private String descricao;
 
 }

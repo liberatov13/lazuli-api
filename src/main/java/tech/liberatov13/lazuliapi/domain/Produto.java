@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -36,7 +37,7 @@ public class Produto {
     private Boolean status;
 
     @Column(name = "dt_cadastro", nullable = false)
-    private LocalDate dataCadastro;
+    private LocalDateTime dataCadastro;
 
     @JsonBackReference
     @ToString.Exclude

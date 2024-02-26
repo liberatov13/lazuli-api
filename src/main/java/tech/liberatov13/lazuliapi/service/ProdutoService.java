@@ -13,6 +13,7 @@ import tech.liberatov13.lazuliapi.repository.ProdutoRepository;
 import tech.liberatov13.lazuliapi.repository.TipoProdutoRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -52,7 +53,7 @@ public class ProdutoService {
             if (produto.getDescricaoCompleta() != null && !produto.getDescricaoCompleta().isBlank())
                 produto.setDescricaoCompleta(produto.getDescricaoCompleta().toUpperCase());
 
-            produto.setDataCadastro(LocalDate.now());
+            produto.setDataCadastro(LocalDateTime.now());
 
             Produto produtoSaved = produtoRepository.save(produto);
             logger.info("Produto salvo com sucesso, id: " + produtoSaved.getIdProduto());

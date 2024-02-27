@@ -39,6 +39,7 @@ public class MarcaService {
 
     public Marca save(Marca marca) {
 		try {
+			marca.setIdMarca(null);
 			marca.setNome(marca.getNome().toUpperCase());
 			return marcaRepository.save(marca);
 		} catch (Exception e) {

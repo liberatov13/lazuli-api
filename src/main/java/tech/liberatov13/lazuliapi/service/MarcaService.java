@@ -1,5 +1,7 @@
 package tech.liberatov13.lazuliapi.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.liberatov13.lazuliapi.domain.Marca;
@@ -13,6 +15,8 @@ public class MarcaService {
     @Autowired
     private MarcaRepository marcaRepository;
 
+	private final Logger logger = LoggerFactory.getLogger(MarcaService.class);
+
     public Marca findById(Long idMarca) {
         return marcaRepository.findById(idMarca).orElse(null);
     }
@@ -20,20 +24,31 @@ public class MarcaService {
     /**
      * @return Todas as marcas com status ativo
      */
-    public List<Marca> findMarcasAtivas() {
+    public List<Marca> findActiveMarcas() {
         return marcaRepository.findByStatus(true);
     }
 
-    public List<Marca> findMarcas() {
-        return marcaRepository.findAll();
-    }
+    public List<Marca> findAll() {
+		try {
+			return marcaRepository.findAll();
+		} catch (Exception e) {
+			logger.error("Ocorreu um erro ao buscar marcas", e);
+			throw new RuntimeException(e);
+		}
+	}
 
-    public Marca salvar(Marca marca) {
-        marca.setNome(marca.getNome().toUpperCase());
-        return marcaRepository.save(marca);
-    }
+    public Marca save(Marca marca) {
+		try {
+			marca.setIdMarca(null);
+			marca.setNome(marca.getNome().toUpperCase());
+			return marcaRepository.save(marca);
+		} catch (Exception e) {
+			logger.error("Ocorreu um erro ao salvar a marca de id {}", marca.getIdMarca(), e);
+			throw new RuntimeException(e);
+		}
+	}
 
-    public Marca editar(Marca marca) {
-        return this.salvar(marca);
+    public Marca update(Marca marca) {
+        return this.save(marca);
     }
 }

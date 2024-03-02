@@ -6,7 +6,7 @@ spring:
   # Banco de dados
   datasource:
     url: "jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/lazuli?createDatabaseIfNotExist=false"
-    username: ${DB_USER:root}
+    username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:123mudar}
 
   # JPA

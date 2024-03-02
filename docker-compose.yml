@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  database:
+    image: mysql:8.2
+    container_name: lazuli-db
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ~/.docker/mysql:/var/lib/mysql
+    networks:
+      - lazuli-network
+
+  api:
+    build:
+      context: .
+    image: lazuli-api
+    container_name: lazuli-api
+    links:
+      - database
+    depends_on:
+      - database
+    expose:
+      - "8080"
+    ports:
+      - "8089:8080"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    networks:
+      - lazuli-network
+
+networks:
+    lazuli-network:
+        driver: bridge

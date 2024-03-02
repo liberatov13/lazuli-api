@@ -1,6 +1,6 @@
 # Configuracao de execucao
 server:
-  port: 8098
+  port: 8080
 
 spring:
   # Banco de dados

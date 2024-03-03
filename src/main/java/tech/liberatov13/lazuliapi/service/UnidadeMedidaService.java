@@ -34,4 +34,13 @@ public class UnidadeMedidaService {
             throw new RuntimeException(e);
         }
     }
+
+    public void delete(Long idUnidadeMedida) {
+        try {
+            unidadeMedidaRepository.deleteById(idUnidadeMedida);
+        } catch (Exception e) {
+            logger.error("Ocorreu um erro ao deletar a unidade de medida de id {}",idUnidadeMedida, e);
+            throw new RuntimeException(e);
+        }
+    }
 }

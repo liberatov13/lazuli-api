@@ -3,9 +3,7 @@ package tech.liberatov13.lazuliapi.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.liberatov13.lazuliapi.domain.UnidadeMedida;
 import tech.liberatov13.lazuliapi.dto.UnidadeMedidaDTO;
 import tech.liberatov13.lazuliapi.service.UnidadeMedidaService;
@@ -28,5 +26,11 @@ public class UnidadeMedidaController {
 				.map(unidade -> modelMapper.map(unidade, UnidadeMedidaDTO.class))
 				.toList();
 		return ResponseEntity.ok(responseBody);
+	}
+
+	@DeleteMapping("/{idUnidadeMedida}")
+	public ResponseEntity<Void> delete(@PathVariable("idUnidadeMedida") Long idUnidadeMedida) {
+		unidadeMedidaService.delete(idUnidadeMedida);
+		return ResponseEntity.noContent().build();
 	}
 }

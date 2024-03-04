@@ -35,6 +35,16 @@ public class UnidadeMedidaService {
         }
     }
 
+    public UnidadeMedida save(UnidadeMedida unidadeMedida) {
+        try {
+			unidadeMedida.setIdUnidadeMedida(null);
+			return unidadeMedidaRepository.save(unidadeMedida);
+		} catch (Exception e) {
+			logger.error("Ocorreu um erro ao salvar a unidade de medida", e);
+			throw new RuntimeException(e);
+		}
+    }
+
     public void delete(Long idUnidadeMedida) {
         try {
             unidadeMedidaRepository.deleteById(idUnidadeMedida);

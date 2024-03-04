@@ -23,8 +23,4 @@ public class UnidadeMedida {
 
     @Column(length = 5)
     private String simbolo;
-
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
-    private Boolean status;
-
 }

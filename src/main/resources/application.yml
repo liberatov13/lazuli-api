@@ -23,3 +23,8 @@ loggingfile:
   name: "logs/lazuli-logs.log"
   charset: "console=UTF-8"
   logback: "rollingpolicy.max-history=5"
+
+springdoc:
+  swagger-ui:
+    path: swagger-ui.html
+    disable-swagger-default-url: true

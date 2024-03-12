@@ -7,5 +7,4 @@ public class UnidadeMedidaDTO {
 	private Long idUnidadeMedida;
 	private String nome;
 	private String simbolo;
-	private Boolean status;
 }

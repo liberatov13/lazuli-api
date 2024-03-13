@@ -12,4 +12,6 @@ public interface MarcaRepository extends JpaRepository<Marca, Long> {
     List<Marca> findAll();
 
     List<Marca> findByStatus(Boolean status);
+
+	List<Marca> findByNomeContainsIgnoreCase(String term);
 }

@@ -1,5 +1,7 @@
 package tech.liberatov13.lazuliapi.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,5 +47,12 @@ public class ProdutoController {
 	public ResponseEntity<Void> activate(@PathVariable Long idProduto) {
 		produtoService.activate(idProduto);
 		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("autocomplete")
+	public ResponseEntity<List<ProdutoDTO>> findByDescription(@RequestParam String term) {
+		List<Produto> produtos = produtoService.findByDescription(term);
+		List<ProdutoDTO> response = produtos.stream().map(produto -> modelMapper.map(produto, ProdutoDTO.class)).toList();
+		return ResponseEntity.ok().body(response);
 	}
 }

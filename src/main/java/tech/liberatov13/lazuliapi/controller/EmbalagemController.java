@@ -55,6 +55,7 @@ public class EmbalagemController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = {
 			@ApiResponse(description = "Embalagem criada", responseCode = "201"),
+			@ApiResponse(description = "Os dados enviados não estão válidos", responseCode = "400"),
 			@ApiResponse(description = "Erro ao criar embalagem", responseCode = "500")
 	})
 	public ResponseEntity<EmbalagemResponseDTO> create(@Valid @RequestBody EmbalagemRequestDTO embalagem) {

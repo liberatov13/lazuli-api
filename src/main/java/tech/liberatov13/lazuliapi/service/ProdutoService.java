@@ -115,4 +115,12 @@ public class ProdutoService {
         }
     }
 
+	public List<Produto> findByDescription(String term) {
+        try {
+            return produtoRepository.findByDescricaoBasicaContainingIgnoreCase(term);
+        } catch (Exception e) {
+            logger.error("Ocorreu um erro ao consultar produtos com a descrição \"{}\"", term, e);
+            throw new RuntimeException(e);
+        }
+    }
 }

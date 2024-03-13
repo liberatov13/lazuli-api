@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tech.liberatov13.lazuliapi.domain.Marca;
 import tech.liberatov13.lazuliapi.repository.MarcaRepository;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -51,4 +52,13 @@ public class MarcaService {
     public Marca update(Marca marca) {
         return this.save(marca);
     }
+
+	public List<Marca> findByDescription(String term) {
+		try {
+			return marcaRepository.findByNomeContainsIgnoreCase(term);
+		} catch (Exception e) {
+			logger.error("Ocorreu um erro ao consultar as marcas com nome \"{}\"", term, e);
+			throw new RuntimeException(e);
+		}
+	}
 }

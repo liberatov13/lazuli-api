@@ -34,4 +34,12 @@ public class MarcaController {
 		MarcaDTO marcaDTOSaved = modelMapper.map(marcaSaved, MarcaDTO.class);
 		return ResponseEntity.ok(marcaDTOSaved);
 	}
+
+	@GetMapping("/autocomplete")
+	public ResponseEntity<List<MarcaDTO>> findByDescription(@RequestParam String term) {
+		List<MarcaDTO> marcasDTO = marcaService.findByDescription(term).stream()
+				.map((marca) -> modelMapper.map(marca, MarcaDTO.class))
+				.toList();
+		return ResponseEntity.ok(marcasDTO);
+	}
 }

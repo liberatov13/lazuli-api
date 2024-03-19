@@ -4,18 +4,6 @@
 
 Lazuli é um sistema ERP desenvolvido para uma confeitaria, com o objetivo de auxiliar no controle de entrada e saída de produtos, lucros, despesas, precificação de produtos, entre outras informações.
 
-<img src="https://github.com/liberatov13/lazuli-ui/blob/master/.github/assets/home-page.png" />
-<table>
-  <tr>
-    <td>
-      <img src="https://github.com/liberatov13/lazuli-ui/blob/master/.github/assets/product-list-page.png"/>
-    </td>
-    <td>
-      <img src="https://github.com/liberatov13/lazuli-ui/blob/master/.github/assets/product-form-page.png"/>
-    </td>
-  </tr>
-</table>
-
 ## Índice
 - [Sobre o projeto](#sobre-o-projeto-scroll)
   - [Funcionalidades do sistema](#funcionalidades)
